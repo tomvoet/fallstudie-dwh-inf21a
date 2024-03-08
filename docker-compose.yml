@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    ports:
+      - "1883:1883"
+    restart: always
+  postgres:
+    image: postgres:16
+    container_name: mqtt-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+#       - ./mqtt-postgres:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
+    restart: always
+  pg-admin:
+    image: dpage/pgadmin4
+    container_name: pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "test"
+    ports:
+      - "5050:80"
+    links:
+      - postgres
+
+# volumes:
+#   mqtt-postgres:
