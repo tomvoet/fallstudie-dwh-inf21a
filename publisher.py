@@ -34,8 +34,10 @@ mqttc = mqtt.Client(
 mqttc.connect("broker.hivemq.com", 1883, 60)
 
 while True:
+    # Generate a new message
     msg = Message.generate()
 
+    # Publish the message
     send_msg = mqttc.publish(
         "DataMgmt",
         msg.toJSON(),
