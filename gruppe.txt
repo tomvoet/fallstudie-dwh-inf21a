@@ -2,3 +2,5 @@ Eva Becker, 7169819
 Florens Gneiting, 5024817
 Florian Hofmann, 8215730
 Tom Voet, 3953185
+
+https://github.com/tomvoet/fallstudie-dwh-inf21a
