@@ -29,8 +29,13 @@ CREATE TABLE starschema.dim_kennzeichen (
 CREATE TABLE starschema.fact_fahrzeugkauf (
     load_date timestamp with time zone,
     kauf_date date,
-    fahrzeug_id integer FOREIGN KEY REFERENCES starschema.dim_fahrzeug(fahrzeug_id),
-    kunde_id integer FOREIGN KEY REFERENCES starschema.dim_kunde(kunde_id),
-    kennzeichen_id integer FOREIGN KEY REFERENCES starschema.dim_kennzeichen(kennzeichen_id),
-    CONSTRAINT fact_key UNIQUE (fahrzeug_id, kunde_id, kennzeichen_id, kauf_date)
+    fahrzeug_id integer NOT NULL,
+    kunde_id integer NOT NULL,
+    kennzeichen_id integer NOT NULL,
+    rabatt_pct integer,
+    kaufpreis integer,
+    CONSTRAINT fact_key UNIQUE (fahrzeug_id, kunde_id, kennzeichen_id, kauf_date),
+    FOREIGN KEY (fahrzeug_id) REFERENCES starschema.dim_fahrzeug(fahrzeug_id),
+    FOREIGN KEY (kunde_id) REFERENCES starschema.dim_kunde(kunde_id),
+    FOREIGN KEY (kennzeichen_id) REFERENCES starschema.dim_kennzeichen(kennzeichen_id)
 );
